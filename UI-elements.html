@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>1000 Randomized Sharp-Cornered Form Elements</title>
+  <style>
+    body {
+      background: #f6f7fa;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 18px 0;
+    }
+    h2 {
+      text-align: center;
+      color: #335;
+      margin-bottom: 10px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .item {
+      min-width: 220px;
+      background: #fff;
+      box-shadow: 0 2px 9px 0 rgba(42,48,55,0.06);
+      text-align: center;
+      padding: 12px 7px 13px 7px;
+      margin: 2px 0 2px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1em;
+      /* No border-radius */
+    }
+    label {
+      color: #3b4a54;
+      font-size: 0.97em;
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+    .styled-btn, .styled-input, .styled-radio, .styled-select {
+      width: 172px;
+      margin: 3px 0;
+      font-size: 1em;
+      /* No border-radius */
+      outline: none;
+    }
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      min-width: 0;
+      background: none;
+    }
+    legend {
+      color: #425;
+      font-size: 0.98em;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    /* The unique, index-based styles will be dynamically added below */
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let styleTag = document.createElement('style');
+      let styles = '';
+      for (let i = 0; i < 250; ++i) {
+        // Button
+        styles += `
+        .styled-btn-${i} {
+          background: hsl(${i*360/250}, ${52 + i%23}%, ${55 + i%17}%);
+          color: hsl(${(i*347/250 + 180)%360}, 50%, 97%);
+          border: ${1+(i%3)}px solid hsl(${i*360/250}, 60%, 32%);
+          box-shadow: 0 0px ${(i%7)+2}px 0 hsla(${i*360/250},70%,50%,0.09);
+          font-weight: 600;
+          transition: background 0.23s, color 0.23s;
+        }
+        .styled-btn-${i}:hover {
+          background: hsl(${i*360/250}, 90%, ${40 + (i%14)}%);
+          color: #fff;
+        }
+        `;
+        // Input
+        styles += `
+        .styled-input-${i} {
+          border: ${1+(i%2)}px solid hsl(${i*360/250}, 40%, 54%);
+          background: hsl(${i*360/250},23%,${97 - (i%12)}%);
+          color: hsl(${i*360/250}, 51%, ${30 + (i%18)}%);
+          padding: ${5 + (i % 3)}px ${9 + (i%6)}px;
+          box-shadow: 0 2px 4px 0 hsla(${i*360/250},45%,55%,.07);
+        }
+        .styled-input-${i}:focus {
+          border-color: hsl(${i*360/250}, 78%, 42%);
+          background: hsl(${i*360/250},34%,96%);
+        }
+        `;
+        // Radio
+        styles += `
+        .styled-radio-label-${i} {
+          font-size: 0.97em;
+          color: hsl(${i*360/250}, 31%, 39%);
+          display: flex;
+          align-items: center;
+          margin-bottom: 4px;
+        }
+        .styled-radio-${i} {
+          accent-color: hsl(${i*360/250}, 66%, 53%);
+          margin-right: 6px;
+          width: 16px; height: 16px;
+        }
+        `;
+        // Select
+        styles += `
+        .styled-select-${i} {
+          border: ${1+(i%2)}px solid hsl(${i*360/250}, 58%, 34%);
+          background: hsl(${i*360/250},${26 + (i%16)}%,${96 - (i%5)}%);
+          color: hsl(${i*360/250},39%,${28 + (i%17)}%);
+          padding: ${6 + (i % 2)}px ${11 + (i%7)}px;
+          font-weight: 500;
+        }
+        .styled-select-${i}:focus {
+          border-color: hsl(${i*360/250}, 62%, 31%);
+        }
+        `;
+      }
+      styleTag.innerHTML = styles;
+      document.head.appendChild(styleTag);
+    });
+  </script>
+</head>
+<body>
+  <h2>1000 Randomized Form Elements with Unique Styles</h2>
+  <div class="container" id="all-elements">
+    <!-- JavaScript will generate the elements here -->
+  </div>
+  <script>
+    // Generate 250 of each element and store them in the list
+    let allItems = [];
+
+    // Buttons
+    for (let i = 0; i < 250; i++) {
+      let item = document.createElement('div');
+      item.className = 'item';
+      let btn = document.createElement('button');
+      btn.className = `styled-btn styled-btn-${i}`;
+      btn.textContent = `Button #${i+1}`;
+      item.appendChild(btn);
+      allItems.push(item);
+    }
+    // Inputs
+    for (let i = 0; i < 250; i++) {
+      let item = document.createElement('div');
+      item.className = 'item';
+      let label = document.createElement('label');
+      label.innerText = `Input #${i+1}`;
+      let input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Type something...';
+      input.className = `styled-input styled-input-${i}`;
+      item.appendChild(label);
+      item.appendChild(input);
+      allItems.push(item);
+    }
+    // Radios (group of 3 radios)
+    for (let i = 0; i < 250; i++) {
+      let item = document.createElement('div');
+      item.className = 'item';
+      let fieldset = document.createElement('fieldset');
+      let legend = document.createElement('legend');
+      legend.textContent = `Radio Group #${i+1}`;
+      fieldset.appendChild(legend);
+      let name = `radio-group-${i}`;
+      for (let j = 0; j < 3; j++) {
+        let lbl = document.createElement('label');
+        lbl.className = `styled-radio-label-${i}`;
+        let radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.className = `styled-radio styled-radio-${i}`;
+        radio.name = name;
+        if (j === 0) radio.checked = true;
+        lbl.appendChild(radio);
+        lbl.appendChild(document.createTextNode(`Option ${j+1}`));
+        fieldset.appendChild(lbl);
+      }
+      item.appendChild(fieldset);
+      allItems.push(item);
+    }
+    // Dropdowns
+    for (let i = 0; i < 250; i++) {
+      let item = document.createElement('div');
+      item.className = 'item';
+      let label = document.createElement('label');
+      label.innerText = `Dropdown #${i+1}`;
+      let select = document.createElement('select');
+      select.className = `styled-select styled-select-${i}`;
+      for (let j = 1; j <= 4; j++) {
+        let opt = document.createElement('option');
+        opt.value = "" + j;
+        opt.textContent = `Choice ${j}`;
+        select.appendChild(opt);
+      }
+      item.appendChild(label);
+      item.appendChild(select);
+      allItems.push(item);
+    }
+
+    // Shuffle the array for random order (Fisher-Yates)
+    for (let i = allItems.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [allItems[i], allItems[j]] = [allItems[j], allItems[i]];
+    }
+
+    // Add to document
+    const container = document.getElementById('all-elements');
+    allItems.forEach(ele => container.appendChild(ele));
+  </script>
+</body>
+</html>

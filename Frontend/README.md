@@ -1,16 +1,29 @@
-# UI Annotation Tool Frontend
+# UI Tagging Tool (Frontend)
 
-React-based frontend for UI annotation and element detection.
+A web UI toolkit for annotating UI screenshots (React + Konva + Material UI).
 
 ## Features
 
-- Upload images (screenshots of UIs)
-- Draw and tag bounding boxes (button, input, radio, dropdown)
-- Run auto-prediction (via backend)
-- Export/save annotation data as JSON
+- Upload a screenshot.
+- Draw bounding boxes by dragging the mouse.
+- Assign tags (Button, Input, Radio, Dropdown).
+- Save annotations as JSON.
+- Predict (call backend for GPT-4 Vision tagging, boxes overlaid in green).
+
+---
 
 ## Installation
 
-```bash
+```sh
 cd frontend
 npm install
+npm start
+```
+
+### Annotation format
+```
+[
+{"box": [x, y, width, height], "tag": "Button"}
+] 
+```
+

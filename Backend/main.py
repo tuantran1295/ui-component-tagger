@@ -17,7 +17,20 @@ app.add_middleware(
 )
 
 MODEL_PATH = "./models/best.pt"
-CLASS_MAP = {0: "button", 1: "input", 2: "radio", 3: "dropdown"}
+# CLASS_MAP = {0: "button", 1: "input", 2: "radio", 3: "dropdown"}
+
+CLASS_MAP = {0: "button", 4: "input", 6: "radio", 2: "dropdown"}
+
+# - button      (0)
+# - checkbox    (1)
+# - dropdown    (2)
+# - icon        (3)
+# - input       (4)
+# - label       (5)
+# - radio       (6)   <--- class_id = 6
+# - slider      (7)
+# - switch      (8)
+# - table       (9)
 
 # Load YOLO model once on server startup
 yolo_model = YOLO(MODEL_PATH)
@@ -37,8 +50,9 @@ async def predict_ui(file: UploadFile = File(...)):
     if boxes is not None:
         for box in boxes:
             cls_id = int(box.cls.item())
-            xyxy = box.xyxy.cpu().numpy()[0]  # [x1, y1, x2, y2]
-            tag = CLASS_MAP.get(cls_id, "unknown")
-            coords = [round(float(x), 2) for x in xyxy]
-            result.append({"box": coords, "tag": tag})
+            if cls_id == 0 or cls_id == 2 or cls_id == 4 or cls_id == 6:
+                xyxy = box.xyxy.cpu().numpy()[0]  # [x1, y1, x2, y2]
+                tag = CLASS_MAP.get(cls_id, "unknown")
+                coords = [round(float(x), 2) for x in xyxy]
+                result.append({"box": coords, "tag": tag})
     return result

@@ -55,5 +55,5 @@ async def predict_ui(file: UploadFile = File(...)):
                 tag = CLASS_MAP.get(cls_id, "unknown")
                 coords = [round(float(x), 2) for x in xyxy]
                 result.append({"box": coords, "tag": tag})
-    result.sort(key=lambda item: (item["box"][0], item["box"][1]))
+    result.sort(key=lambda item: (round(item["box"][1] / 20), item["box"][0]))
     return result

@@ -23,7 +23,7 @@ npm start
 ### Annotation format
 ```
 [
-{"box": [x, y, width, height], "tag": "Button"}
+{ "box": [x1, y1, x2, y2], "tag": "button" }
 ] 
 ```
 
